@@ -5,15 +5,15 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-egui = "0.32.0"
-eframe = "0.32.0"
+egui = "0.32.3"
+eframe = "0.32.3"
 egui_logger = "0.8.0"
-#egui_taffy = "0.8.0"
 #egui_extras = { version = "0.32.0", features = ["image", "all_loaders"] }
 egui-file-dialog = { version = "0.11.0", features = ["information_view"] }
 catppuccin-egui = { version = "5.6.0", default-features = false, features = ["egui32"] }
 log = "0.4.27"
 rust-ini = "0.21.3"
 #walkdir = "2.5.0"
-#egui-modal = "0.6.0"
+egui-modal = "0.6.0"
 #egui_memory_editor = "0.2.12"
+#egui-gizmo = "0.16.2"
