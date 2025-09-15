@@ -1,10 +1,18 @@
 #![allow(non_snake_case)]
 #![allow(non_camel_case_types)]
-pub mod parse;
-pub mod extractor;
-pub mod app;
+mod extractor;
+mod app;
 mod config;
-
+mod parse;
+mod parseOVL;
+mod parseZAP;
+mod viewer;
+mod viewerModel;
+mod viewerSfx;
+mod viewerImage;
+mod viewerText;
+mod viewerVideo;
+mod appDirectory;
 use std::path::PathBuf;
 pub use app::gui;
 
@@ -19,17 +27,17 @@ pub enum EntryState{
     Error, //if any step has failed
 }
 
-pub enum ArchiveType {
+pub enum ArchiveType{
     ZAP,
     OVL,
 }
 
 pub enum FileType{
-    MODEL,
-    SOUND,
-    TEXTURE,
-    VIDEO,
-    TEXT,
+    MODEL, //mdl
+    SOUND, //sfx, music
+    IMAGE, //textures, gui elements, etc.
+    VIDEO, //fmvs (might not be needed)
+    TEXT, //string + localization files, lua
 }
 
 pub struct File{
@@ -46,32 +54,3 @@ pub struct Zap{
 pub struct Ovl{
     path: PathBuf,
 }
-
-/*pub enum EntryType{
-    /*Model*/
-    Model, //.mdl //mesh data
-    ModelAnim, //.modelanim [animation data]
-
-    /*Materials & Textures*/
-    Sprite, //.spr [sprite for UI?]
-    Texture, //.tex [textures for model]
-    TextureRegion, // .texreg [???]
-    GUITexturedScalable, //.txs [vector image?]
-    BmpTbl, //.btbl [???]
-    Flic, //.flic [animated image]
-
-    /*Audio*/
-    Audio, //.aud [audio data]
-    SoundEffectDesc, //.sfx [parameters for making runtime sfx? or extra metadata for aud file?]
-
-    /*Strings & Text*/
-    Text, //.txt [strings]
-    FontAuthored, //.font [font]
-
-    /*Misc*/
-    MissionDesc, //.mis [???]
-    MissionPeepGroupDesc, //.mpg [???]
-    SavedTrackRide, //.trh [stores coaster design? or coaster metadata?]
-}*/
-
-

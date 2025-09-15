@@ -84,11 +84,11 @@ impl gui{
                         .as_modal(false)
                         .show_hidden_option(true)
                         .show_pinned_folders(true)
-                        .default_file_filter("OVL")
-                        .add_file_filter_extensions("OVL", vec!["ovl"]),
+                        .default_file_filter("Thrillville archive")
+                        .add_file_filter_extensions("Thrillville archive", vec!["zap", "ovl"]),
                     informationPanel: InformationPanel::default()
+                        //todo: Is this actually not needed?
                         .add_file_preview("csv", |ui, item|{
-                            ui.label("CSV preview:");
                             if let Some(mut content) = item.content(){
                                 egui::ScrollArea::vertical()
                                     .max_height(ui.available_height())
@@ -174,7 +174,7 @@ fn guiToolbar(ctx: &Context, gui: &mut gui){
 
 fn guiCentralPanel(ctx: &Context, guiChild: &mut guiChildVars){
     CentralPanel::default().show(ctx, |ui|{
-        //todo: waiting for scripts
+        //todo: will hold the zap FS directory view
     });
 }
 
@@ -227,6 +227,7 @@ fn guiAboutModal(ctx: &Context, modal: &mut modal){
 }
 
 //todo: make it so that the modal can be triggered from out-of-scope
+//note: investigate using the egui modal crate
 fn guiErrorModal(ctx: &Context, modal: &mut modal){
     let modal = Modal::new(Id::new("Error"))
         .show(ctx, |ui|{
@@ -366,10 +367,10 @@ fn saveSettings(gui: &mut gui){
 
 fn getTheme() -> Theme{
     match cfgRead(&cfgLoad(), "gui", "theme").to_lowercase().as_str(){
-        "frappe" => { warn!("Setting theme to frappe"); catppuccin_egui::FRAPPE }
-        "macchiato" => { warn!("Setting theme to macchiato"); catppuccin_egui::MACCHIATO }
-        "mocha" => { warn!("Setting theme to mocha"); catppuccin_egui::MOCHA }
-        "latte" => { warn!("Setting theme to latte"); catppuccin_egui::LATTE }
+        "frappe" => { catppuccin_egui::FRAPPE }
+        "macchiato" => { catppuccin_egui::MACCHIATO }
+        "mocha" => { catppuccin_egui::MOCHA }
+        "latte" => { catppuccin_egui::LATTE }
         _ => {
             error!("Invalid theme in config.ini! Defaulting to frappe");
             catppuccin_egui::FRAPPE
