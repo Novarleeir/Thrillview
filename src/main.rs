@@ -1,10 +1,9 @@
 #![allow(non_snake_case)]
 #![allow(non_camel_case_types)]
-use log::{info, warn, error, debug, trace, LevelFilter};
+use log::{debug, error, info, trace, warn, LevelFilter};
 use crate::config::{cfgLoad, cfgRead};
 use ini::Ini;
 mod config;
-mod extractor;
 
 fn main(){
     let config = cfgLoad();
@@ -34,7 +33,7 @@ fn thrillview(config: &Ini) -> eframe::Result{
         &("Thrillview ".to_owned() + env!("CARGO_PKG_VERSION")),
         viewportOptions,
         Box::new(|ctx|{
-            Ok(Box::new(thrillview::gui::new(ctx, config.clone())))}),
+            Ok(Box::new(thrillview::gui::new(&ctx.egui_ctx, config.clone())))}),
     )
 }
 
@@ -49,12 +48,11 @@ fn thrillview(config: &Ini) -> eframe::Result{
 */
 
 /*todo app:
-   - app.rs | main gui handler
    - appDirectory.rs | for viewing the zap file system and files within the ovls. https://crates.io/crates/egui_ltreeview
 */
 
 /*todo viewer (for viewing files):
-   - viewer.rs | root viewport that calls the correct viewer function for the specific file type. Should be made to be instantiated so that multiple preview windows may be opened at once
+   - mod | root viewport that calls the correct viewer function for the specific file type. Should be made to be instantiated so that multiple preview windows may be opened at once
    - viewerModel.rs | viewing 3D models. Use this?: https://crates.io/crates/egui-gizmo
    - viewerSfx.rs | listen to sound files and music. View waveform? Volume controls?
    - viewerImage.rs | viewing textures and other various 2D elements

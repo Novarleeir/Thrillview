@@ -6,7 +6,7 @@ use std::{fs::{OpenOptions}, io::{ErrorKind}};
 use ini::Ini;
 
 /// Check to see if the ini file exists on disk
-fn cfgExists(){
+fn cfgExists(){ //todo: redo this to return a bool
     match OpenOptions::new().read(true).open("../config.ini"){
         Ok(file) => {
             drop(file);
